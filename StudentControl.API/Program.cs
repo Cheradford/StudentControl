@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<StudentControl.Infastructure.Context>(options => 
     options.UseMySql(
         builder.Configuration.GetConnectionString("Database"),
-        new MySqlServerVersion(new Version(8, 0, 31))
+        new MySqlServerVersion(new Version(8, 0, 30))
     )
 
 );

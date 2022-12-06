@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentControl.Infastructure;
 
@@ -10,9 +11,10 @@ using StudentControl.Infastructure;
 namespace StudentControl.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20221205081813_SQLMigration0.1")]
+    partial class SQLMigration01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,12 +75,7 @@ namespace StudentControl.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("StudentID")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentID");
 
                     b.ToTable("Logins");
                 });
@@ -117,7 +114,10 @@ namespace StudentControl.Infrastructure.Migrations
                     b.Property<short>("Graduate")
                         .HasColumnType("smallint");
 
-                    b.Property<Guid>("GroupID")
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("LoginId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Middle_name")
@@ -139,7 +139,9 @@ namespace StudentControl.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupID");
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("LoginId");
 
                     b.ToTable("Students");
                 });
@@ -159,26 +161,21 @@ namespace StudentControl.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentControl.Domain.Model.Login", b =>
-                {
-                    b.HasOne("StudentControl.Domain.Model.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("StudentControl.Domain.Model.Student", b =>
                 {
                     b.HasOne("StudentControl.Domain.Model.Group", "Group")
                         .WithMany("Students")
-                        .HasForeignKey("GroupID")
+                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StudentControl.Domain.Model.Login", "Login")
+                        .WithMany()
+                        .HasForeignKey("LoginId");
+
                     b.Navigation("Group");
+
+                    b.Navigation("Login");
                 });
 
             modelBuilder.Entity("StudentControl.Domain.Model.Group", b =>

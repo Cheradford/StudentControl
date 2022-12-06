@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentControl.Infastructure;
 
@@ -10,9 +11,10 @@ using StudentControl.Infastructure;
 namespace StudentControl.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20221206110932_SQLMigration0.2")]
+    partial class SQLMigration02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,7 +119,10 @@ namespace StudentControl.Infrastructure.Migrations
                     b.Property<short>("Graduate")
                         .HasColumnType("smallint");
 
-                    b.Property<Guid>("GroupID")
+                    b.Property<Guid>("GroipID")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("GroupId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Middle_name")
@@ -139,7 +144,7 @@ namespace StudentControl.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupID");
+                    b.HasIndex("GroupId");
 
                     b.ToTable("Students");
                 });
@@ -174,7 +179,7 @@ namespace StudentControl.Infrastructure.Migrations
                 {
                     b.HasOne("StudentControl.Domain.Model.Group", "Group")
                         .WithMany("Students")
-                        .HasForeignKey("GroupID")
+                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

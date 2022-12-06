@@ -9,7 +9,7 @@ namespace StudentControl.Domain.Model
     public enum Name
     {
         Priem,
-        group_formation,
+        Group_formation,
         Electives,
         Distribution_by_bases_of_practice,
         Transfer,
@@ -17,11 +17,13 @@ namespace StudentControl.Domain.Model
     }
     public class Order
     {
-        public string Id { get; set; }
-        public Name name { get; set; }
+        public Guid Id { get; set; }
+        public string Number { get; set; } = string.Empty;
+        public Name Name { get; set; }
         public DateTime Date { get; set; }
-        public string comment { get; set; }
-        public List<Student> students { get; set; }
+        public string Comment { get; set; } = string.Empty;
+
+        public List<Student> Students { get; set; } = new List<Student>();
 
     }
 }

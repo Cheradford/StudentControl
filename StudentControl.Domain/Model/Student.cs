@@ -8,21 +8,22 @@ namespace StudentControl.Domain.Model
 {
     public enum Status
     {
-        studying,
-        notstudying
+        Studying,
+        Notstudying
     }
     public class Student
     {
-        public Guid id { get; set; }
-        public string name { get; set; }
-        public string surname { get; set; }
-        public string? middle_name { get; set; }
-        public Status status { get; set; }
-        public short graduate { get; set; }
-        public string? snils { get; set; }
-        public Login? login { get; set; }
-        public Group group { get; set; }
-        public List<Order>? orders { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Surname { get; set; } = string.Empty;
+        public string? Middle_name { get; set; }
+        public Status Status { get; set; }
+        public short Graduate { get; set; }
+        public string? Snils { get; set; }
+
+        public Guid GroupID { get; set; }
+        public Group Group { get; set; } = null!;
+        public List<Order> Orders { get; set; } = new List<Order>();
 
     }
 }

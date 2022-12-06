@@ -9,17 +9,18 @@ namespace StudentControl.Domain.Model
 {
     public enum Formofstudy
     {
-        full_time,
-        part_time
+        Full_time,
+        Part_time
     }
     public class Group
     {
         public Guid Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         public int NumberOfPeople { get; set; }
-        public Formofstudy formofstudy { get; set; }
-        public string StudyProfile { get; set; }
-        public List<Student> students { get; set; }
+        public Formofstudy Formofstudy { get; set; }
+        public string StudyProfile { get; set; } = string.Empty;
+
+        public List<Student> Students { get; set; } = new List<Student>();
     }
 }
