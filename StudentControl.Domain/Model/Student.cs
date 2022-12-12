@@ -21,8 +21,8 @@ namespace StudentControl.Domain.Model
         public short Graduate { get; set; }
         public string? Snils { get; set; }
 
-        public Guid GroupID { get; set; }
-        public Group Group { get; set; } = null!;
+        public Guid? GroupID { get; set; }
+        public Group Group { get; set; }
         public List<Order> Orders { get; set; } = new List<Order>();
 
     }
