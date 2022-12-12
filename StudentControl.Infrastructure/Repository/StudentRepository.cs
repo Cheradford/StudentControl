@@ -78,7 +78,6 @@ namespace StudentControl.Infrastructure.Repository
                         existStudent.Orders.Remove(existStudentOrder);
                     }
                 }
-
                 //Добавление новых или изменение существующих приказов
                 foreach (var NewOrder in ChangedStudent.Orders)
                 {
@@ -93,7 +92,6 @@ namespace StudentControl.Infrastructure.Repository
                     {
                         existStudent.Orders.Add(NewOrder);
                     }
-
                     await context.SaveChangesAsync();
 
                 }
