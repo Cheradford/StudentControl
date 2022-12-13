@@ -1,4 +1,4 @@
-﻿using StudentControl.Infastructure;
+﻿using StudentControl.Infrastructure;
 using StudentControl.Domain.Model;
 using System;
 using System.Collections.Generic;

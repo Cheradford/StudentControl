@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentControl.Domain.Model;
-using StudentControl.Infastructure;
+using StudentControl.Infrastructure;
 using StudentControl.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace TestProject
 {
-    internal class TestHelper
+    public class TestHelper
     {
         private readonly Context context;
 

@@ -1,5 +1,5 @@
 ﻿using StudentControl.Domain.Model;
-using StudentControl.Infastructure;
+using StudentControl.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

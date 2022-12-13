@@ -10,9 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<StudentControl.Infastructure.Context>(options => 
+builder.Services.AddDbContext<StudentControl.Infrastructure.Context>(options => 
     options.UseMySql(
-        builder.Configuration.GetConnectionString("Database"),
+        builder.Configuration.GetConnectionString("TestDB"),
         new MySqlServerVersion(new Version(8, 0, 30))
     )
 

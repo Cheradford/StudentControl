@@ -3,7 +3,7 @@ using StudentControl.Domain.Model;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace StudentControl.Infastructure
+namespace StudentControl.Infrastructure
 {
     public class Context : DbContext
     {

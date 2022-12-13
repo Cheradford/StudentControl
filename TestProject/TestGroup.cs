@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentControl.Domain.Model;
-using StudentControl.Infastructure;
+using StudentControl.Infrastructure;
 using StudentControl.Infrastructure.Repository;
 
 namespace TestProject
