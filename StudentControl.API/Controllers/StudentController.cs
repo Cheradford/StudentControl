@@ -31,15 +31,29 @@ namespace StudentControl.API.Controllers
 
         // GET api/<StudentController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Student>> Get(Guid id)
         {
-            return "value";
+            try
+            {
+                var student = await studentRepository.OnlyGetByIdAsync(id);
+                if (student == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(student);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
 
         // POST api/<StudentController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
+
         }
 
         // PUT api/<StudentController>/5

@@ -22,8 +22,19 @@ namespace StudentControl.Domain.Model
         public string? Snils { get; set; }
 
         public Guid? GroupID { get; set; }
-        public Group Group { get; set; }
+        public Group? Group { get; set; }
         public List<Order> Orders { get; set; } = new List<Order>();
+
+        public void RemoveGroup()
+        {
+            GroupID = null;
+            Group = null; 
+        }
+        public void SetGroup(Group group)
+        {
+            GroupID = group.Id;
+            Group = group;
+        }
 
     }
 }

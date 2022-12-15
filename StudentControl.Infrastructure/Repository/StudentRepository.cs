@@ -44,6 +44,12 @@ namespace StudentControl.Infrastructure.Repository
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<Student?> OnlyGetByIdAsync(Guid id)
+        {
+            return await context.Students.Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
 
         public async Task<Student?> GetByNameAsync(string name)
         {

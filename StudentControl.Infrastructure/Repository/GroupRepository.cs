@@ -71,11 +71,12 @@ namespace StudentControl.Infrastructure.Repository
             {
                 context.Entry(existGroup).CurrentValues.SetValues(ChangedGroup);
                 //Удаление студентов что не входят в новый список
-                foreach (var existStudentOrder in existGroup.Students.ToList())
+                foreach (var existStudent in existGroup.Students.ToList())
                 {
-                    if (!ChangedGroup.Students.Any(ord => ord.Id == existStudentOrder.Id))
+                    if (!ChangedGroup.Students.Any(ord => ord.Id == existStudent.Id))
                     {
-                        existGroup.Students.Remove(existStudentOrder);
+                        existStudent.Group = null;
+                        existGroup.RemoveStudent(existStudent);
                     }
                 }
 
