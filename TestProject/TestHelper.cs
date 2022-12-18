@@ -60,10 +60,10 @@ namespace TestProject
                 Graduate = 2
             };
 
-            Group1.Students.Add(student1);
-            Group1.Students.Add(student3);
-            Group2.Students.Add(student2);
-            Group2.Students.Add(student4);
+            Group1.AddStudent(student1);
+            Group1.AddStudent(student3);
+            Group2.AddStudent(student2);
+            Group2.AddStudent(student4);
             var Order = new Order { Number = "1", Name = Name.Priem, Date = new DateTime() };
             student1.Orders.Add(Order);
             student2.Orders.Add(Order);

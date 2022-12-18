@@ -35,7 +35,7 @@ namespace StudentControl.API.Controllers
         {
             try
             {
-                var student = await studentRepository.OnlyGetByIdAsync(id);
+                var student = await studentRepository.GetByIdAsync(id);
                 if (student == null)
                 {
                     return NotFound();
@@ -51,15 +51,21 @@ namespace StudentControl.API.Controllers
 
         // POST api/<StudentController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Student>> Post(Student student)
         {
-
+            if (context.Students.Any(stud => stud.Id == student.Id)) return BadRequest();
+            await studentRepository.AddAsync(student);
+            return CreatedAtAction(nameof(Post), new { id = student.Id }, student);
         }
 
         // PUT api/<StudentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<Student>> Put(Guid id, Student student)
         {
+
+            if (id != student.Id && !context.Students.Any(stud => stud.Id == student.Id)) return BadRequest();
+            await studentRepository.UpdateAsync(student);
+            return Ok(await studentRepository.GetByIdAsync(id));
         }
 
         // DELETE api/<StudentController>/5
