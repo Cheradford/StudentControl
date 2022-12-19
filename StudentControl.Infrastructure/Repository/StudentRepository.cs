@@ -28,6 +28,7 @@ namespace StudentControl.Infrastructure.Repository
 
         public async Task AddAsync(Student student)
         {
+            //await context.AddAsync(student);
             context.Students.Add(student);
             await context.SaveChangesAsync();
         }
@@ -81,26 +82,27 @@ namespace StudentControl.Infrastructure.Repository
                 {
                     if (!ChangedStudent.Orders.Any(ord => ord.Id == existStudentOrder.Id))
                     {
-                        existStudent.Orders.Remove(existStudentOrder);
+                        existStudent.RemoveOrder(existStudentOrder);
                     }
                 }
                 //Добавление новых или изменение существующих приказов
                 foreach (var NewOrder in ChangedStudent.Orders)
                 {
+                    if (!context.Orders.Any(ord => ord.Id == NewOrder.Id)) context.Add(NewOrder);
                     var existOrder = existStudent.Orders.FirstOrDefault(ord => ord.Id == NewOrder.Id);
-
-                    if(existOrder != null)
+                    if (existOrder != null)
                     {
                         context.Entry(existOrder).CurrentValues.SetValues(NewOrder);
 
                     }
                     else
                     {
-                        existStudent.Orders.Add(NewOrder);
+                        existStudent.AddOrder(NewOrder);
                     }
-                    await context.SaveChangesAsync();
+                    
 
                 }
+                await context.SaveChangesAsync();
             }
         }
 

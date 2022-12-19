@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace StudentControl.Domain.Model
@@ -25,7 +26,7 @@ namespace StudentControl.Domain.Model
 
         public bool AddStudent(Student student)
         {
-            if(Students.Contains(student)) return false;
+            if(Students.Any(stud => stud.Id == student.Id)) return false;
             student.SetGroup(this);
             Students.Add(student);
             NumberOfPeople++;
@@ -35,7 +36,8 @@ namespace StudentControl.Domain.Model
 
         public bool RemoveStudent(Student student)
         {
-            if (Students.Contains(student))
+            var CurStudent = Students.FirstOrDefault(stud => stud.Id == student.Id);
+            if (CurStudent != null)
             {
                 Students.Remove(student);
                 NumberOfPeople--;

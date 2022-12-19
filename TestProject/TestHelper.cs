@@ -27,8 +27,8 @@ namespace TestProject
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-            var Group1 = new Group { Name = "IST-021", NumberOfPeople = 1, Formofstudy = Formofstudy.Full_time, StudyProfile = "IDK1" };
-            var Group2 = new Group { Name = "IST-012", NumberOfPeople = 1, Formofstudy = Formofstudy.Full_time, StudyProfile = "IDK2" };
+            var Group1 = new Group { Name = "IST-021", Formofstudy = Formofstudy.Full_time, StudyProfile = "IDK1" };
+            var Group2 = new Group { Name = "IST-012", Formofstudy = Formofstudy.Full_time, StudyProfile = "IDK2" };
 
 
             var student1 = new Student
@@ -65,11 +65,12 @@ namespace TestProject
             Group2.AddStudent(student2);
             Group2.AddStudent(student4);
             var Order = new Order { Number = "1", Name = Name.Priem, Date = new DateTime() };
-            student1.Orders.Add(Order);
-            student2.Orders.Add(Order);
+            student1.AddOrder(Order);
+            student2.AddOrder(Order);
             student1.Orders.Add(new Order { Number = "21", Name = Name.Group_formation, Date = new DateTime() });
             student2.Orders.Add(new Order { Number = "22", Name = Name.Group_formation, Date = new DateTime() });
 
+            context.Students.AddRange(student1,student2,student3,student4);
             context.Groups.Add(Group1);
             context.Groups.Add(Group2);
 

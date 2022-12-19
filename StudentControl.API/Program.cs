@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using System.Text.Json.Serialization;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,10 @@ builder.Services.AddDbContext<StudentControl.Infrastructure.Context>(options =>
     )
 
 );
+
+//builder.Services.AddAutoMapper(typeof(StudentControl.DTO.MapperProfile));
+
+builder.Services.AddAutoMapper(typeof(StudentControl.DTO.MapperProfile));
 
 var app = builder.Build();
 

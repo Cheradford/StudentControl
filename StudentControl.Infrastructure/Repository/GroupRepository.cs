@@ -75,29 +75,29 @@ namespace StudentControl.Infrastructure.Repository
                 {
                     if (!ChangedGroup.Students.Any(ord => ord.Id == existStudent.Id))
                     {
-                        existStudent.Group = null;
                         existGroup.RemoveStudent(existStudent);
                     }
                 }
 
                 //Добавление новых или изменение существующих студентов
-                foreach (var NewOrder in ChangedGroup.Students)
+                foreach (var NewStudent in ChangedGroup.Students)
                 {
-                    var existOrder = existGroup.Students.FirstOrDefault(ord => ord.Id == NewOrder.Id);
+                    if(!context.Students.Any(stud => stud.Id == NewStudent.Id)) { context.Students.AddAsync(NewStudent); }
+                    var existStudent = existGroup.Students.FirstOrDefault(stud => stud.Id == NewStudent.Id);
 
-                    if (existOrder != null)
+                    if (existStudent != null)
                     {
-                        context.Entry(existOrder).CurrentValues.SetValues(NewOrder);
+                        context.Entry(existStudent).CurrentValues.SetValues(NewStudent);
 
                     }
                     else
                     {
-                        existGroup.Students.Add(NewOrder);
+                        existGroup.Students.Add(NewStudent);
                     }
 
-                    await context.SaveChangesAsync();
-
                 }
+
+                await context.SaveChangesAsync();
             }
         }
     }
