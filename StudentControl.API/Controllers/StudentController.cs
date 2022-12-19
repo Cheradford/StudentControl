@@ -30,13 +30,13 @@ namespace StudentControl.API.Controllers
         //DTO C#
         // GET: api/<StudentController>
         [HttpGet("/AllStudents")]
-        public async Task<IEnumerable<StudentDTO>> GetStudents()
+        public async Task<StudentDTO[]> GetStudents()
         {
-            return mapper.Map<List<Student>, List<StudentDTO>>(await studentRepository.GetAllAsync());
+            return mapper.Map<List<Student>, List<StudentDTO>>(await studentRepository.GetAllAsync()).ToArray();
         }
 
         // GET api/<StudentController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}/Get")]
         public async Task<ActionResult<StudentDTO>> Get(Guid id)
         {
             try
@@ -86,7 +86,7 @@ namespace StudentControl.API.Controllers
         }
 
         // PUT api/<StudentController>/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}/Put")]
         public async Task<ActionResult<StudentDTO>> Put(Guid id, StudentDTO student)
         {
 
@@ -113,7 +113,7 @@ namespace StudentControl.API.Controllers
 
 
         [HttpPut("{StudentId}/SetGroup")]
-        public async Task<ActionResult<Student>> Put(Guid StudentId, Guid GroupId)
+        public async Task<ActionResult<StudentDTO>> Put(Guid StudentId, Guid GroupId)
         {
             var student = await studentRepository.GetByIdAsync(StudentId);
             var group = await context.Groups.FirstOrDefaultAsync(gr => gr.Id == GroupId);
@@ -122,11 +122,11 @@ namespace StudentControl.API.Controllers
             student.SetGroup(group);
 
             await studentRepository.UpdateAsync(student);
-            return Ok(await studentRepository.GetByIdAsync(StudentId));
+            return Ok(mapper.Map<StudentDTO>( await studentRepository.GetByIdAsync(StudentId)));
         }
 
         // DELETE api/<StudentController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/Delete")]
         public async Task<ActionResult> Delete(Guid id)
         {
             if(context.Students.Any(stud => stud.Id == id))
