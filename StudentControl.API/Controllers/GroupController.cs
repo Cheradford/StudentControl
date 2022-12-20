@@ -29,9 +29,9 @@ namespace StudentControl.API.Controllers
         //DTO C#
         // GET: api/<StudentController>
         [HttpGet("/AllGroups")]
-        public async Task<IEnumerable<GroupDTO>> GetStudents()
+        public async Task<GroupDTO[]> GetGroups()
         {
-            return Mapper.Map<List<Group>,List<GroupDTO>>( await GroupRepository.GetAllAsync());
+            return Mapper.Map<List<Group>, List<GroupDTO>>(await GroupRepository.GetAllAsync()).ToArray();
         }
 
         // GET api/<StudentController>/5

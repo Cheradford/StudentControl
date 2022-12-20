@@ -56,7 +56,7 @@ namespace StudentControl.API.Controllers
         }
 
         [HttpGet("{id}/OrdersList")]
-        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders(Guid id)
+        public async Task<ActionResult<OrderDTO[]>> GetOrders(Guid id)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace StudentControl.API.Controllers
                 }
 
                 //return Ok(student.Orders.ToList());
-                return Ok(mapper.Map<List<Order>, List<OrderDTO>>(student.Orders.ToList()));
+                return Ok(mapper.Map<List<Order>, List<OrderDTO>>(student.Orders.ToList()).ToArray());
             }
             catch (Exception e)
             {
